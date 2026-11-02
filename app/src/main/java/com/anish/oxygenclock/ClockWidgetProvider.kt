@@ -7,6 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.SystemClock
+import android.view.View
 import android.widget.RemoteViews
 import org.json.JSONObject
 import java.net.HttpURLConnection
@@ -42,19 +43,37 @@ class ClockWidgetProvider : AppWidgetProvider() {
         }
         fun updateOne(c: Context, m: AppWidgetManager, id: Int) {
             val v = RemoteViews(c.packageName, R.layout.widget_clock)
-            val now = Date(); val hh = SimpleDateFormat("HH", Locale.getDefault()).format(now)
-            v.setTextViewText(R.id.day_text, SimpleDateFormat("EEEE", Locale.getDefault()).format(now))
-            v.setTextViewText(R.id.hour_first, hh.substring(0,1))
-            v.setTextViewText(R.id.hour_rest, hh.substring(1) + ":" + SimpleDateFormat("mm", Locale.getDefault()).format(now))
-            v.setTextViewText(R.id.date_text, SimpleDateFormat("d MMM", Locale.getDefault()).format(now))
+            val now = Date()
+            val hour24 = SimpleDateFormat("HH", Locale.getDefault()).format(now)
+            val minute = SimpleDateFormat("mm", Locale.getDefault()).format(now)
+            val day = SimpleDateFormat("EEEE", Locale.getDefault()).format(now)
+            val date = SimpleDateFormat("d MMM", Locale.getDefault()).format(now)
+            val rest = hour24.substring(1) + ":" + minute
+            val style = c.getSharedPreferences("clock_settings", Context.MODE_PRIVATE).getInt("style", 0).coerceIn(0, 2)
+            v.setViewVisibility(R.id.style_classic, if (style == 0) View.VISIBLE else View.GONE)
+            v.setViewVisibility(R.id.style_vertical, if (style == 1) View.VISIBLE else View.GONE)
+            v.setViewVisibility(R.id.style_minimal, if (style == 2) View.VISIBLE else View.GONE)
+            v.setTextViewText(R.id.day_text, day)
+            v.setTextViewText(R.id.hour_first, hour24.substring(0,1))
+            v.setTextViewText(R.id.hour_rest, rest)
+            v.setTextViewText(R.id.date_text, date)
+            v.setTextViewText(R.id.vertical_day, day.uppercase(Locale.getDefault()))
+            v.setTextViewText(R.id.vertical_first, hour24.substring(0,1))
+            v.setTextViewText(R.id.vertical_rest, rest)
+            v.setTextViewText(R.id.vertical_date, date.uppercase(Locale.getDefault()))
+            v.setTextViewText(R.id.minimal_day, day)
+            v.setTextViewText(R.id.minimal_first, hour24.substring(0,1))
+            v.setTextViewText(R.id.minimal_rest, rest)
+            v.setTextViewText(R.id.minimal_date, date)
             val cfg = PendingIntent.getActivity(c, id, Intent(c, SettingsActivity::class.java).putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,id), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             v.setOnClickPendingIntent(R.id.widget_root, cfg)
-            m.updateAppWidget(id, v); weather(c,m,id)
+            m.updateAppWidget(id, v)
+            weather(c, m, id)
         }
         private fun weather(c: Context, m: AppWidgetManager, id: Int) {
             val city = c.getSharedPreferences("clock_settings",Context.MODE_PRIVATE).getString("city","Delhi") ?: "Delhi"
             thread {
-                var label = "☁ --°"
+                var label = "○ --°"
                 try {
                     val q=URLEncoder.encode(city,"UTF-8")
                     val g=URL("https://geocoding-api.open-meteo.com/v1/search?name=$q&count=1&language=en&format=json").openConnection() as HttpURLConnection
@@ -67,12 +86,15 @@ class ClockWidgetProvider : AppWidgetProvider() {
                         w.connectTimeout=8000; w.readTimeout=8000
                         val cur=JSONObject(w.inputStream.bufferedReader().use{it.readText()}).getJSONObject("current"); w.disconnect()
                         val code=cur.getInt("weather_code"); val temp=cur.getDouble("temperature_2m").toInt()
-                        val icon=when(code){0->"☀";1,2->"🌤";3->"☁";45,48->"🌫";in 51..67->"🌧";in 71..77->"❄";in 80..82->"🌦";in 95..99->"⛈";else->"☁"}
-                        label="$icon $temp°"
+                        val icon=when(code){0->"☼";1,2->"◒";3->"☁";45,48->"≋";in 51..67->"﹅";in 71..77->"✳";in 80..82->"◌";in 95..99->"ϟ";else->"☁"}
+                        label="$icon  $temp°"
                     }
                 } catch (_:Exception) {}
                 val v=RemoteViews(c.packageName,R.layout.widget_clock)
-                v.setTextViewText(R.id.weather_text,label); m.updateAppWidget(id,v)
+                v.setTextViewText(R.id.weather_text,label)
+                v.setTextViewText(R.id.vertical_weather,label)
+                v.setTextViewText(R.id.minimal_weather,label)
+                m.updateAppWidget(id,v)
             }
         }
     }
