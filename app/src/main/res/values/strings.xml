@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Oxygen Clock</string>
+    <string name="widget_description">Minimal OxygenOS-inspired clock and weather widget</string>
+</resources>
