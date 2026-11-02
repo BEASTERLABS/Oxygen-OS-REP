@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent"
+ android:orientation="vertical" android:gravity="center_vertical" android:padding="6dp" android:background="@android:color/transparent">
+ <TextView android:id="@+id/day_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tuesday" android:textColor="#FFFFFFFF" android:textSize="30sp" android:fontFamily="sans-serif-medium" android:includeFontPadding="false"/>
+ <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="bottom">
+  <TextView android:id="@+id/hour_first" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" android:textColor="#E52B2B" android:textSize="80sp" android:fontFamily="sans-serif" android:includeFontPadding="false"/>
+  <TextView android:id="@+id/hour_rest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7:05" android:textColor="#FFFFFFFF" android:textSize="80sp" android:fontFamily="sans-serif" android:includeFontPadding="false"/>
+ </LinearLayout>
+ <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+  <TextView android:id="@+id/date_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6 Jan" android:textColor="#FFFFFFFF" android:textSize="26sp" android:includeFontPadding="false"/>
+  <TextView android:id="@+id/weather_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:text="☁ --°" android:textColor="#FFFFFFFF" android:textSize="26sp" android:includeFontPadding="false"/>
+ </LinearLayout>
+</LinearLayout>
