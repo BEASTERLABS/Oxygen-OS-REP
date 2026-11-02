@@ -1,40 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
- android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent"
- android:padding="6dp" android:background="@android:color/transparent">
-
- <LinearLayout android:id="@+id/style_classic" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center_vertical">
-  <TextView android:id="@+id/day_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tuesday" android:textColor="#FFFFFFFF" android:textSize="30sp" android:fontFamily="sans-serif-medium" android:includeFontPadding="false"/>
-  <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="bottom">
-   <TextView android:id="@+id/hour_first" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" android:textColor="#E52B2B" android:textSize="80sp" android:fontFamily="sans-serif" android:includeFontPadding="false"/>
-   <TextView android:id="@+id/hour_rest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7:05" android:textColor="#FFFFFFFF" android:textSize="80sp" android:fontFamily="sans-serif" android:includeFontPadding="false"/>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="8dp" android:background="@android:color/transparent">
+ <LinearLayout android:id="@+id/style_split" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal" android:gravity="center_vertical">
+  <LinearLayout android:layout_width="0dp" android:layout_weight="1.2" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center_vertical">
+   <TextView android:id="@+id/split_hour" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="07" android:textColor="#FFF4E9E7" android:textSize="100sp" android:fontFamily="sans-serif-condensed" android:textStyle="bold" android:includeFontPadding="false"/>
+   <TextView android:id="@+id/split_minute" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="41" android:textColor="#CCF4E9E7" android:textSize="100sp" android:fontFamily="sans-serif-condensed" android:textStyle="bold" android:includeFontPadding="false"/>
   </LinearLayout>
-  <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
-   <TextView android:id="@+id/date_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6 Jan" android:textColor="#FFFFFFFF" android:textSize="26sp" android:includeFontPadding="false"/>
-   <TextView android:id="@+id/weather_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:text="☁  --°" android:textColor="#FFFFFFFF" android:textSize="24sp" android:includeFontPadding="false"/>
+  <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:orientation="vertical" android:gravity="top|end" android:paddingTop="10dp">
+   <TextView android:id="@+id/split_date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24 Dec Wed" android:textColor="#FFF4E9E7" android:textSize="18sp"/>
+   <TextView android:id="@+id/split_weather" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="☁ 19°" android:textColor="#FFF4E9E7" android:textSize="18sp"/>
+   <TextView android:id="@+id/split_city" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Delhi" android:textColor="#AAFFFFFF" android:textSize="13sp"/>
+   <TextView android:id="@+id/split_condition" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:padding="12dp" android:background="@drawable/glass_soft" android:text="19° Overcast" android:textColor="#FFF4E9E7" android:textSize="15sp"/>
+   <TextView android:id="@+id/split_highlow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="14° / 23°" android:textColor="#CCFFFFFF" android:textSize="13sp"/>
   </LinearLayout>
  </LinearLayout>
-
+ <LinearLayout android:id="@+id/style_classic" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center_vertical">
+  <TextView android:id="@+id/classic_day" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wednesday" android:textColor="#CCFFFFFF" android:textSize="20sp"/>
+  <TextView android:id="@+id/classic_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="07:41" android:textColor="#FFFFFFFF" android:textSize="82sp" android:fontFamily="sans-serif" android:includeFontPadding="false"/>
+  <TextView android:id="@+id/classic_meta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24 Dec · 19°" android:textColor="#DDFFFFFF" android:textSize="18sp"/>
+ </LinearLayout>
  <LinearLayout android:id="@+id/style_vertical" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
-  <TextView android:id="@+id/vertical_day" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TUESDAY" android:textColor="#CCFFFFFF" android:textSize="14sp" android:letterSpacing="0.16" android:fontFamily="sans-serif-medium"/>
-  <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="bottom">
-   <TextView android:id="@+id/vertical_first" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" android:textColor="#E52B2B" android:textSize="72sp" android:fontFamily="sans-serif-light" android:includeFontPadding="false"/>
-   <TextView android:id="@+id/vertical_rest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7:05" android:textColor="#FFFFFFFF" android:textSize="72sp" android:fontFamily="sans-serif-light" android:includeFontPadding="false"/>
-  </LinearLayout>
-  <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center">
-   <TextView android:id="@+id/vertical_date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6 JAN" android:textColor="#CCFFFFFF" android:textSize="16sp"/>
-   <TextView android:id="@+id/vertical_weather" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="○ --°" android:textColor="#FFFFFFFF" android:textSize="18sp"/>
-  </LinearLayout>
+  <TextView android:id="@+id/vertical_day" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="WEDNESDAY" android:textColor="#CCFFFFFF" android:textSize="14sp" android:letterSpacing="0.16"/>
+  <TextView android:id="@+id/vertical_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="07:41" android:textColor="#FFFFFFFF" android:textSize="76sp" android:fontFamily="sans-serif-light" android:includeFontPadding="false"/>
+  <TextView android:id="@+id/vertical_meta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24 Dec · 19°" android:textColor="#DDFFFFFF" android:textSize="17sp"/>
  </LinearLayout>
-
- <LinearLayout android:id="@+id/style_minimal" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center_vertical">
-  <TextView android:id="@+id/minimal_day" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tuesday" android:textColor="#CCFFFFFF" android:textSize="18sp" android:fontFamily="sans-serif-medium"/>
-  <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="bottom">
-   <TextView android:id="@+id/minimal_first" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" android:textColor="#E52B2B" android:textSize="66sp" android:fontFamily="sans-serif-light" android:includeFontPadding="false"/>
-   <TextView android:id="@+id/minimal_rest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7:05" android:textColor="#FFFFFFFF" android:textSize="66sp" android:fontFamily="sans-serif-light" android:includeFontPadding="false"/>
-  </LinearLayout>
-  <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
-   <TextView android:id="@+id/minimal_date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6 Jan" android:textColor="#CCFFFFFF" android:textSize="20sp"/>
-   <TextView android:id="@+id/minimal_weather" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:text="○ --°" android:textColor="#FFFFFFFF" android:textSize="20sp"/>
+ <LinearLayout android:id="@+id/style_minimal" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal" android:gravity="center_vertical">
+  <TextView android:id="@+id/minimal_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="07:41" android:textColor="#FFFFFFFF" android:textSize="54sp" android:fontFamily="sans-serif-medium" android:includeFontPadding="false"/>
+  <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="14dp">
+   <TextView android:id="@+id/minimal_day" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wed, 24 Dec" android:textColor="#FFFFFFFF" android:textSize="16sp"/>
+   <TextView android:id="@+id/minimal_weather" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="◌ 19°" android:textColor="#CCFFFFFF" android:textSize="15sp"/>
   </LinearLayout>
  </LinearLayout>
 </FrameLayout>
